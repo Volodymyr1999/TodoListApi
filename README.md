@@ -1,1 +1,1 @@
-# TodoListApi
+This is a TodoListApi. You can create,update,delete,sort your tasks. You must register or login in the app to test the feautures. You should download this app to your pc, and run it from Visual Studio(pass button run) or run it by console command. There are default Importances in table importances. Another tables are empty. You must login register or login first to add new info in tables by this api.
