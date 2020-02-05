@@ -30,7 +30,7 @@ namespace TODO.Controllers
         }
 
         // create task from taskView
-        [HttpPost("/createtask")]
+        [HttpPost("createtask")]
 
         public async Task< IActionResult> CreateTask(TaskView taskView)
         {
@@ -41,7 +41,7 @@ namespace TODO.Controllers
         }
         
         //update existing task using taskView
-        [HttpPut("/updatetask")]
+        [HttpPut("updatetask")]
         public IActionResult UpdateTask(TaskView taskView)
         {
             Models.Task task = _taskManager.UpdateTask(taskView);
@@ -49,7 +49,7 @@ namespace TODO.Controllers
         }
 
         //delete multiple task by id
-        [HttpDelete("/deletetask")]
+        [HttpDelete("deletetask")]
         public async Task<IActionResult>DeleteTask(List<int>taskIds)
         {
             foreach(var id in taskIds)
@@ -58,7 +58,7 @@ namespace TODO.Controllers
             return Ok("deleted");
         }
         //find task by name in all lists and return it in taskview object
-        [HttpGet("/findtaskbyname")]
+        [HttpGet("findtaskbyname")]
         public async Task GetTasksByName(string Name,bool completed)
         {
             Models.User user =await _userService.FindUser(User);
@@ -69,7 +69,7 @@ namespace TODO.Controllers
 
         //set sort order all user's list in application
         //all next task's queries will be sorted by this order
-        [HttpGet("/setorder")]
+        [HttpGet("setorder")]
         public async Task setOrder(string fieldname,bool ascending=false)
         {
             

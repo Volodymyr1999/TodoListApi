@@ -44,7 +44,7 @@ namespace TODO.Controllers
 
         //Create new CustomList and set list's name
         [Authorize]
-        [HttpPost("/createcustomlist")]
+        [HttpPost("createcustomlist")]
         public async Task CreateCustomList(string NameCustomList)
         {
             Models.User user = await _userService.FindUser(User);
@@ -56,7 +56,7 @@ namespace TODO.Controllers
 
         //get all customLists created by user
         [Authorize]
-        [HttpGet("/getCustomLists")]
+        [HttpGet("getCustomLists")]
         public async Task getCustomLists(bool completed=false)
         {
             Models.User user =await _userService.FindUser(User);
@@ -68,7 +68,7 @@ namespace TODO.Controllers
 
         //delete customList by Id after deleting return "deleted"
         [Authorize]
-        [HttpDelete("/deleteCustomList/{Id}")]
+        [HttpDelete("deleteCustomList/{Id}")]
         public async Task deleteCustomList(int Id)
         {
             await _customListService.RemoveCustomList(Id);
@@ -77,7 +77,7 @@ namespace TODO.Controllers
 
         //rename customlist
         [Authorize]
-        [HttpPost("/renamecustomlist")]
+        [HttpPost("renamecustomlist")]
         public async Task RenameCustomList(int id,string name)
         {
             await _customListService.RenameList(id, name);

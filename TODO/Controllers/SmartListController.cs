@@ -33,7 +33,7 @@ namespace TODO.Controllers
         }
 
         //get all tasks created by user
-        [HttpGet("/alltask")]
+        [HttpGet("alltask")]
         public async Task AllTasks(bool completed=false)
         {
             Models.User user = await _userService.FindUser(User);
@@ -42,7 +42,7 @@ namespace TODO.Controllers
             await Response.WriteAsync(JsonConvert.SerializeObject(tasks, jsonSerializerSettings));
         }
         //get all tasks created by user where DueDate isn't null
-        [HttpGet("/plannedtasks")]
+        [HttpGet("plannedtasks")]
         public async Task<IActionResult> PlannedTasks(bool completed = false)
         {
             Models.User user = await _userService.FindUser(User);
@@ -50,7 +50,7 @@ namespace TODO.Controllers
             return Ok(JsonConvert.SerializeObject(tasks, jsonSerializerSettings));
         }
         //get all tasks created by user where date of creation is today
-        [HttpGet("/todaytasks")]
+        [HttpGet("todaytasks")]
         public async Task<IActionResult>ToDayTasks(bool completed = false)
         {
             Models.User user = await _userService.FindUser(User);
@@ -59,7 +59,7 @@ namespace TODO.Controllers
         }
 
         //get all tasks created by user which have Importance hight or normal
-        [HttpGet("/importanttasks")]
+        [HttpGet("importanttasks")]
         public async Task<IActionResult>ImportantTasks(bool completed = false)
         {
             Models.User user = await _userService.FindUser(User);
