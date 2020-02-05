@@ -10,6 +10,9 @@ using TODO.Services;
 
 namespace TODO.Controllers
 {
+    /// <summary>
+    /// SmartList
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -23,7 +26,12 @@ namespace TODO.Controllers
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         };
-        //constructor
+        /// <summary>
+        /// conctructor
+        /// </summary>
+        /// <param name="userService"></param>
+        /// <param name="taskManager"></param>
+        /// <param name="context"></param>
         public SmartListController(UserService userService,TaskManager taskManager,Models.TodoContext context)
         {
             db = context;
@@ -32,7 +40,12 @@ namespace TODO.Controllers
             _taskManager.setDb(db);
         }
 
-        //get all tasks created by user
+        /// <summary>
+        /// get all tasks created by user
+        /// if completed==true return completed tasks
+        /// </summary>
+        /// <param name="completed"></param>
+        /// <returns>list of tasks</returns>
         [HttpGet("alltask")]
         public async Task AllTasks(bool completed=false)
         {
@@ -41,7 +54,12 @@ namespace TODO.Controllers
             Response.ContentType = "application/json";
             await Response.WriteAsync(JsonConvert.SerializeObject(tasks, jsonSerializerSettings));
         }
-        //get all tasks created by user where DueDate isn't null
+        /// <summary>
+        /// get all tasks created by user where DueDate!=null
+        /// if completed==true return completed tasks
+        /// </summary>
+        /// <param name="completed"></param>
+        /// <returns>list of tasks</returns>
         [HttpGet("plannedtasks")]
         public async Task<IActionResult> PlannedTasks(bool completed = false)
         {
@@ -49,7 +67,12 @@ namespace TODO.Controllers
             var tasks = await _taskManager.getPlannedTasks(user, completed);
             return Ok(JsonConvert.SerializeObject(tasks, jsonSerializerSettings));
         }
-        //get all tasks created by user where date of creation is today
+        /// <summary>
+        /// get all tasks created by user where CreationDate==Today
+        /// if completed==true return completed tasks
+        /// </summary>
+        /// <param name="completed"></param>
+        /// <returns>list of tasks</returns>
         [HttpGet("todaytasks")]
         public async Task<IActionResult>ToDayTasks(bool completed = false)
         {
@@ -58,7 +81,12 @@ namespace TODO.Controllers
             return Ok(JsonConvert.SerializeObject(tasks, jsonSerializerSettings));
         }
 
-        //get all tasks created by user which have Importance hight or normal
+        /// <summary>
+        /// get all tasks created by user where Importance==hight or normal
+        /// if completed==true return completed tasks
+        /// </summary>
+        /// <param name="completed"></param>
+        /// <returns>list of tasks</returns>
         [HttpGet("importanttasks")]
         public async Task<IActionResult>ImportantTasks(bool completed = false)
         {

@@ -11,6 +11,9 @@ using TODO.ViewModels;
 
 namespace TODO.Controllers
 {
+    /// <summary>
+    /// TaskController
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -29,7 +32,11 @@ namespace TODO.Controllers
             _userService = userService;
         }
 
-        // create task from taskView
+        /// <summary>
+        /// create task from model taskview
+        /// </summary>
+        /// <param name="taskView"></param>
+        /// <returns>'created'</returns>
         [HttpPost("createtask")]
 
         public async Task< IActionResult> CreateTask(TaskView taskView)
@@ -40,7 +47,11 @@ namespace TODO.Controllers
             return Ok(new { info = "created" });
         }
         
-        //update existing task using taskView
+        /// <summary>
+        /// uodate task by taskView
+        /// </summary>
+        /// <param name="taskView"></param>
+        /// <returns>'updated'</returns>
         [HttpPut("updatetask")]
         public IActionResult UpdateTask(TaskView taskView)
         {
@@ -48,7 +59,11 @@ namespace TODO.Controllers
             return Ok("updated");
         }
 
-        //delete multiple task by id
+        /// <summary>
+        /// delete multiple tasks by id
+        /// </summary>
+        /// <param name="taskIds"></param>
+        /// <returns>'deletedl</returns>
         [HttpDelete("deletetask")]
         public async Task<IActionResult>DeleteTask(List<int>taskIds)
         {
@@ -57,9 +72,14 @@ namespace TODO.Controllers
 
             return Ok("deleted");
         }
-        //find task by name in all lists and return it in taskview object
+        /// <summary>
+        /// find task in all lists created bu user by name
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="completed"></param>
+        /// <returns>list of TaskView</returns>
         [HttpGet("findtaskbyname")]
-        public async Task GetTasksByName(string Name,bool completed)
+        public async Task GetTasksByName(string Name,bool completed=false)
         {
             Models.User user =await _userService.FindUser(User);
             var tasks = _taskManager.FindByName(user, Name, completed);
@@ -67,8 +87,13 @@ namespace TODO.Controllers
             await Response.WriteAsync(JsonConvert.SerializeObject(tasks, jsonSerializerSettings));
         }
 
-        //set sort order all user's list in application
-        //all next task's queries will be sorted by this order
+       /// <summary>
+       /// set sort order for all lists creted by user in api
+       /// next operations with this lists will have this sorting order
+       /// </summary>
+       /// <param name="fieldname"></param>
+       /// <param name="ascending"></param>
+       /// <returns></returns>
         [HttpGet("setorder")]
         public async Task setOrder(string fieldname,bool ascending=false)
         {

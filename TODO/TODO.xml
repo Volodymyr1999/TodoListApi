@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TODO</name>
+    </assembly>
+    <members>
+        <member name="T:TODO.Controllers.AccountController">
+            <summary>
+            accounts
+            </summary>
+        </member>
+        <member name="M:TODO.Controllers.AccountController.#ctor(TODO.Models.TodoContext,TODO.Services.AuthenticationService,TODO.Services.UserService)">
+            <summary>
+            constructor
+            </summary>
+            <param name="todoContext"></param>
+            <param name="service"></param>
+            <param name="uservice"></param>
+        </member>
+        <member name="M:TODO.Controllers.AccountController.Token(TODO.ViewModels.UserView)">
+            <summary>
+            login existed user
+            </summary>
+            <param name="userView"></param>
+            <returns>username and token</returns>
+        </member>
+        <member name="M:TODO.Controllers.AccountController.Register(TODO.ViewModels.UserView)">
+            <summary>
+            register new user and add it to database
+            </summary>
+            <param name="userView"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TODO.Controllers.ListController">
+            <summary>
+            ListController
+            </summary>
+        </member>
+        <member name="M:TODO.Controllers.ListController.#ctor(TODO.Models.TodoContext,TODO.Services.TaskManager,TODO.Services.CustomListService,TODO.Services.UserService)">
+            <summary>
+            constructor
+            </summary>
+            <param name="context"></param>
+            <param name="taskManger"></param>
+            <param name="customListService"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:TODO.Controllers.ListController.get">
+            <summary>
+            home page
+            </summary>
+            <returns>hello</returns>
+        </member>
+        <member name="M:TODO.Controllers.ListController.CreateCustomList(System.String)">
+            <summary>
+            Create new Custom list
+            </summary>
+            <param name="NameCustomList"></param>
+            <returns>customList</returns>
+        </member>
+        <member name="M:TODO.Controllers.ListController.getCustomLists(System.Boolean)">
+            <summary>
+            get all customLists created by user
+            </summary>
+            <param name="completed"></param>
+            <returns>object with customlists</returns>
+        </member>
+        <member name="M:TODO.Controllers.ListController.deleteCustomList(System.Int32)">
+            <summary>
+            delete customList by id
+            </summary>
+            <param name="Id"></param>
+            <returns>'deleted'</returns>
+        </member>
+        <member name="M:TODO.Controllers.ListController.RenameCustomList(System.Int32,System.String)">
+            <summary>
+            rename customlist by id
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <returns>'List succesfuuly renamed'</returns>
+        </member>
+        <member name="T:TODO.Controllers.SmartListController">
+            <summary>
+            SmartList
+            </summary>
+        </member>
+        <member name="M:TODO.Controllers.SmartListController.#ctor(TODO.Services.UserService,TODO.Services.TaskManager,TODO.Models.TodoContext)">
+            <summary>
+            conctructor
+            </summary>
+            <param name="userService"></param>
+            <param name="taskManager"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:TODO.Controllers.SmartListController.AllTasks(System.Boolean)">
+            <summary>
+            get all tasks created by user
+            if completed==true return completed tasks
+            </summary>
+            <param name="completed"></param>
+            <returns>list of tasks</returns>
+        </member>
+        <member name="M:TODO.Controllers.SmartListController.PlannedTasks(System.Boolean)">
+            <summary>
+            get all tasks created by user where DueDate!=null
+            if completed==true return completed tasks
+            </summary>
+            <param name="completed"></param>
+            <returns>list of tasks</returns>
+        </member>
+        <member name="M:TODO.Controllers.SmartListController.ToDayTasks(System.Boolean)">
+            <summary>
+            get all tasks created by user where CreationDate==Today
+            if completed==true return completed tasks
+            </summary>
+            <param name="completed"></param>
+            <returns>list of tasks</returns>
+        </member>
+        <member name="M:TODO.Controllers.SmartListController.ImportantTasks(System.Boolean)">
+            <summary>
+            get all tasks created by user where Importance==hight or normal
+            if completed==true return completed tasks
+            </summary>
+            <param name="completed"></param>
+            <returns>list of tasks</returns>
+        </member>
+        <member name="T:TODO.Controllers.TaskController">
+            <summary>
+            TaskController
+            </summary>
+        </member>
+        <member name="M:TODO.Controllers.TaskController.CreateTask(TODO.ViewModels.TaskView)">
+            <summary>
+            create task from model taskview
+            </summary>
+            <param name="taskView"></param>
+            <returns>'created'</returns>
+        </member>
+        <member name="M:TODO.Controllers.TaskController.UpdateTask(TODO.ViewModels.TaskView)">
+            <summary>
+            uodate task by taskView
+            </summary>
+            <param name="taskView"></param>
+            <returns>'updated'</returns>
+        </member>
+        <member name="M:TODO.Controllers.TaskController.DeleteTask(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            delete multiple tasks by id
+            </summary>
+            <param name="taskIds"></param>
+            <returns>'deletedl</returns>
+        </member>
+        <member name="M:TODO.Controllers.TaskController.GetTasksByName(System.String,System.Boolean)">
+            <summary>
+            find task in all lists created bu user by name
+            </summary>
+            <param name="Name"></param>
+            <param name="completed"></param>
+            <returns>list of TaskView</returns>
+        </member>
+        <member name="M:TODO.Controllers.TaskController.setOrder(System.String,System.Boolean)">
+            <summary>
+            set sort order for all lists creted by user in api
+            next operations with this lists will have this sorting order
+            </summary>
+            <param name="fieldname"></param>
+            <param name="ascending"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TODO.Models.CustomList">
+            <summary>
+            CustomList
+            </summary>
+        </member>
+        <member name="P:TODO.Models.CustomList.Id">
+            <summary>
+            The id of the CustomList created by user
+            </summary>
+        </member>
+        <member name="P:TODO.Models.CustomList.Name">
+            <summary>
+            name of created list
+            </summary>
+        </member>
+        <member name="P:TODO.Models.CustomList.Tasks">
+            <summary>
+            Tasks which this customlist include
+            </summary>
+        </member>
+        <member name="P:TODO.Models.CustomList.UserId">
+            <summary>
+            User's Id
+            </summary>
+        </member>
+        <member name="P:TODO.Models.CustomList.User">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TODO.Models.CustomList.#ctor">
+            <summary>
+            contructor
+            </summary>
+        </member>
+        <member name="T:TODO.Models.Importance">
+            <summary>
+            Importances 'hight','normal,'low'
+            </summary>
+        </member>
+        <member name="P:TODO.Models.Importance.Id">
+            <summary>
+            id 
+            </summary>
+        </member>
+        <member name="P:TODO.Models.Importance.Name">
+            <summary>
+            Importance name for example: 'hight','normal,'low'
+            </summary>
+        </member>
+        <member name="P:TODO.Models.Importance.DigitValue">
+            <summary>
+            number representation of Importance is used for sorting
+            </summary>
+        </member>
+        <member name="P:TODO.Models.Importance.Tasks">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TODO.Models.Importance.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TODO.Models.Importance.CompareTo(System.Object)">
+            <summary>
+            Compare two Importances
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TODO.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <remarks>This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</remarks> 
+        </member>
+    </members>
+</doc>

@@ -12,6 +12,9 @@ using TODO.ViewModels;
 
 namespace TODO.Controllers
 {
+    /// <summary>
+    /// ListController
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ListController : ControllerBase
@@ -22,6 +25,14 @@ namespace TODO.Controllers
         UserService _userService;
         readonly JsonSerializerSettings jsonSerializerSettings =
             new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="taskManger"></param>
+        /// <param name="customListService"></param>
+        /// <param name="userService"></param>
         public ListController(Models.TodoContext context,
             TaskManager taskManger,CustomListService customListService,UserService userService)
         {
@@ -34,7 +45,10 @@ namespace TODO.Controllers
 
             
         }
-
+        /// <summary>
+        /// home page
+        /// </summary>
+        /// <returns>hello</returns>
         [HttpGet("/")] //home page
         public Task get()
         {
@@ -42,7 +56,11 @@ namespace TODO.Controllers
             return Response.WriteAsync("hello");
         }
 
-        //Create new CustomList and set list's name
+        /// <summary>
+        /// Create new Custom list
+        /// </summary>
+        /// <param name="NameCustomList"></param>
+        /// <returns>customList</returns>
         [Authorize]
         [HttpPost("createcustomlist")]
         public async Task CreateCustomList(string NameCustomList)
@@ -54,7 +72,11 @@ namespace TODO.Controllers
             await Response.WriteAsync(JsonConvert.SerializeObject(customList, jsonSerializerSettings));
         }
 
-        //get all customLists created by user
+        /// <summary>
+        /// get all customLists created by user
+        /// </summary>
+        /// <param name="completed"></param>
+        /// <returns>object with customlists</returns>
         [Authorize]
         [HttpGet("getCustomLists")]
         public async Task getCustomLists(bool completed=false)
@@ -66,7 +88,11 @@ namespace TODO.Controllers
             await Response.WriteAsync(JsonConvert.SerializeObject(new { lists = lists },jsonSerializerSettings));
         }
 
-        //delete customList by Id after deleting return "deleted"
+        /// <summary>
+        /// delete customList by id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>'deleted'</returns>
         [Authorize]
         [HttpDelete("deleteCustomList/{Id}")]
         public async Task deleteCustomList(int Id)
@@ -75,7 +101,12 @@ namespace TODO.Controllers
             await Response.WriteAsync("deleted");
         }
 
-        //rename customlist
+        /// <summary>
+        /// rename customlist by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns>'List succesfuuly renamed'</returns>
         [Authorize]
         [HttpPost("renamecustomlist")]
         public async Task RenameCustomList(int id,string name)

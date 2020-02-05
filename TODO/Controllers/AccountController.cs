@@ -11,13 +11,23 @@ using TODO.ViewModels;
 
 namespace TODO.Controllers
 {
+    /// <summary>
+    /// accounts
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    
     public class AccountController : ControllerBase
     {
         Models.TodoContext db;
         private readonly AuthenticationService authService;
         private readonly UserService userService;
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="todoContext"></param>
+        /// <param name="service"></param>
+        /// <param name="uservice"></param>
         public AccountController(Models.TodoContext todoContext,AuthenticationService service,UserService uservice)
         {
             db = todoContext;
@@ -25,6 +35,11 @@ namespace TODO.Controllers
             userService = uservice;
         }
 
+        /// <summary>
+        /// login existed user
+        /// </summary>
+        /// <param name="userView"></param>
+        /// <returns>username and token</returns>
         [HttpPost("login/")]
         public async Task Token([FromForm]UserView userView) //login
         {
@@ -43,6 +58,11 @@ namespace TODO.Controllers
             }
             await Response.WriteAsync("wrong username or password");
         }
+        /// <summary>
+        /// register new user and add it to database
+        /// </summary>
+        /// <param name="userView"></param>
+        /// <returns></returns>
         [HttpPost("register/")]
 
         public async Task Register([FromForm]UserView userView) //register
